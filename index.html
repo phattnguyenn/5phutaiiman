@@ -1,0 +1,2931 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Template Skool 2.0 by 5Phuts Agen: source code elearning đầy đủ để deploy, rebrand và sở hữu platform học tập của riêng bạn.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Template Skool 2.0 — Sở hữu Platform Elearning Của Bạn">
+  <meta property="og:description" content="Source code elearning đầy đủ, thanh toán QR Sepay, auto-enroll và update lifetime. Trả một lần, không subscription.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Template Skool 2.0 — Sở hữu Platform Elearning Của Bạn</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap');
+
+    :root {
+      --bg: #080808;
+      --bg-surface: #0f0f0f;
+      --bg-card: #141414;
+      --text-1: #FFFFFF;
+      --text-2: rgba(255,255,255,0.55);
+      --text-3: rgba(255,255,255,0.30);
+      --accent: #FF4500;
+      --accent-dim: rgba(255,69,0,0.15);
+      --border: rgba(255,255,255,0.07);
+      --border-md: rgba(255,255,255,0.12);
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-full: 999px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg);
+      color: var(--text-1);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .site-background {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background: #080808;
+    }
+    .site-radial {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle 560px at 50% 220px, rgba(255,69,0,0.28), rgba(255,69,0,0.00) 70%),
+        radial-gradient(ellipse 34% 18% at 90% 72%, rgba(255,69,0,0.12) 0%, rgba(255,69,0,0.00) 70%);
+    }
+    .site-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 14px 20px;
+      opacity: 0.35;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 24%, #000 0%, transparent 74%);
+    }
+    #noise-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      image-rendering: pixelated;
+    }
+    main, footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    a { color: inherit; }
+    img { max-width: 100%; }
+    section { padding: 6rem 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      margin-bottom: 1.5rem;
+    }
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text-2);
+      margin-bottom: 1rem;
+    }
+    .accent { color: var(--accent); }
+    .italic { font-style: italic; }
+    .muted { color: var(--text-2); }
+    .section-head { margin-bottom: 3rem; }
+    .section-head.center { text-align: center; max-width: 760px; margin-left: auto; margin-right: auto; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1.5rem;
+    }
+    .eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-2);
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+      background: rgba(255,255,255,0.02);
+    }
+    .eyebrow-pill .site-icon { width: 16px; height: 16px; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0.04) 12%, rgba(255,69,0,0.00) 46%),
+        linear-gradient(180deg, #ff8a2a 0%, #ff4500 46%, #b92700 100%);
+      color: var(--text-1);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,138,42,0.65);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      text-shadow: 0 -1px 0 rgba(90,18,0,0.9);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08) inset,
+        0 1px 0 rgba(255,255,255,0.32) inset,
+        0 -10px 18px rgba(90,18,0,0.25) inset,
+        0 12px 28px rgba(255,69,0,0.22),
+        0 0 42px rgba(255,69,0,0.18);
+    }
+    .btn-primary::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      z-index: -1;
+      border-radius: calc(var(--radius-sm) - 1px);
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.00), rgba(255,255,255,0.28), rgba(255,255,255,0.00)),
+        radial-gradient(ellipse 80% 120% at 50% 0%, rgba(255,255,255,0.32), rgba(255,255,255,0.00) 55%);
+      opacity: 0.55;
+      mix-blend-mode: screen;
+      transform: translateX(-22%);
+      transition: transform 0.35s, opacity 0.25s;
+    }
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.00) 36%);
+      opacity: 0.8;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.08) saturate(1.05);
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.12) inset,
+        0 1px 0 rgba(255,255,255,0.38) inset,
+        0 -10px 18px rgba(90,18,0,0.22) inset,
+        0 16px 34px rgba(255,69,0,0.3),
+        0 0 56px rgba(255,69,0,0.26);
+    }
+    .btn-primary:hover::before { transform: translateX(18%); opacity: 0.78; }
+    .btn-primary:active { transform: translateY(2px) scale(0.99); filter: brightness(0.96); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: transparent;
+      color: var(--text-2);
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); color: var(--text-1); }
+    .btn-primary-lg { padding: 18px 36px; font-size: 0.9rem; }
+    .btn-cta-full { width: 100%; justify-content: center; padding: 16px; font-size: 0.95rem; margin-top: 1.5rem; }
+
+    .card { background: var(--bg-card); border: 1px solid var(--border); padding: 2rem; }
+    .card-grid-cell {
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      transition: background 0.2s;
+    }
+    .card-grid-cell:hover { background: var(--bg-surface); }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    .microcopy { margin-top: 0.9rem; color: var(--text-3); font-size: 0.78rem; line-height: 1.4; }
+
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.2rem 1.5rem;
+      transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+    }
+    #nav.scrolled {
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .site-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--accent);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .site-icon.fill { fill: currentColor; stroke: none; }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 1.2rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text-1);
+      text-decoration: none;
+    }
+    .logo-badge {
+      width: 34px;
+      height: 34px;
+      color: var(--accent);
+      filter: drop-shadow(0 0 18px rgba(255,69,0,0.24));
+    }
+    .logo-word span { color: var(--accent); }
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-cta:hover { color: var(--text-1); }
+
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: transparent;
+      padding-top: 8rem;
+    }
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-inner { max-width: 720px; }
+    .hero-sub { max-width: 690px; font-size: 1.08rem; }
+    .hero-actions { margin-top: 2rem; }
+    .hero-profile-card {
+      display: block;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+      box-shadow: 0 0 80px rgba(255,69,0,0.08), 0 32px 70px rgba(0,0,0,0.55);
+      transform: translateY(12px);
+      overflow: hidden;
+    }
+    .hero-profile-visual {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(255,69,0,0.12), rgba(255,69,0,0.00) 65%),
+        var(--bg);
+    }
+    .hero-profile-visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 26%;
+    }
+    .hero-profile-body {
+      padding: 1.1rem 1.2rem 1.2rem;
+    }
+    .hero-profile-label {
+      display: inline-flex;
+      width: fit-content;
+      padding: 0.26rem 0.62rem;
+      border-radius: var(--radius-full);
+      background: var(--accent-dim);
+      border: 1px solid rgba(255,69,0,0.22);
+      color: var(--accent);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+    .hero-profile-name {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.35rem;
+    }
+    .hero-profile-role {
+      color: var(--text-2);
+      font-size: 0.84rem;
+      margin-bottom: 1rem;
+    }
+    .hero-profile-points {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .hero-profile-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      color: var(--text-2);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+    .hero-profile-points .site-icon {
+      width: 16px;
+      height: 16px;
+      margin-top: 1px;
+    }
+    .stats-bar {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; min-width: 120px; }
+    .stat-value { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.04em; }
+    .stat-label { font-size: 0.75rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    .preview-section { padding: 0 0 6rem; }
+    .preview-wrapper {
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 0 80px rgba(255,69,0,0.06), 0 40px 80px rgba(0,0,0,0.6);
+      background: var(--bg-card);
+    }
+    .mock-browser {
+      min-height: 520px;
+      background: var(--bg);
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+    .mock-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .mock-dots { display: flex; gap: 6px; }
+    .mock-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--text-3);
+    }
+    .mock-url {
+      flex: 1;
+      max-width: 460px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      color: var(--text-3);
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .mock-screen {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 480px;
+    }
+    .mock-sidebar {
+      border-right: 1px solid var(--border);
+      padding: 1.5rem;
+      background: var(--bg-surface);
+    }
+    .mock-brand {
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-bottom: 2rem;
+    }
+    .mock-nav-line {
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.6rem;
+      background: var(--bg);
+    }
+    .mock-nav-line.active { background: var(--accent-dim); border-color: rgba(255,69,0,0.25); }
+    .mock-content { padding: 1.5rem; }
+    .mock-hero {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      min-height: 150px;
+      padding: 1.5rem;
+      background: radial-gradient(ellipse 70% 90% at 60% 50%, rgba(255,69,0,0.25), rgba(255,69,0,0.00) 65%), var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 0.7rem;
+    }
+    .mock-title { width: 56%; height: 22px; background: var(--text-1); border-radius: var(--radius-sm); }
+    .mock-text { width: 78%; height: 10px; background: var(--text-3); border-radius: var(--radius-full); }
+    .mock-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .mock-course {
+      min-height: 150px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+      padding: 1rem;
+    }
+    .mock-thumb {
+      height: 70px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, #1a0a00 0%, #0f0f0f 100%);
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    .mock-small { height: 9px; background: var(--text-3); border-radius: var(--radius-full); margin-bottom: 0.5rem; }
+    .mock-small.short { width: 56%; }
+
+    .dashboard-shot {
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 220px 1fr 250px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 38% 42% at 18% 10%, rgba(255,69,0,0.14), rgba(255,69,0,0.00) 72%),
+        radial-gradient(ellipse 40% 48% at 78% 12%, rgba(255,69,0,0.07), rgba(255,69,0,0.00) 70%),
+        var(--bg);
+    }
+    .dashboard-sidebar {
+      border-right: 1px solid var(--border-md);
+      padding: 1.35rem 1rem;
+      background:
+        radial-gradient(ellipse 70% 50% at 30% 5%, rgba(255,69,0,0.14), rgba(255,69,0,0.00) 70%),
+        rgba(8,8,8,0.74);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .dashboard-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+    }
+    .dashboard-brand-mark {
+      width: 34px;
+      height: 34px;
+      color: var(--accent);
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 16px rgba(255,69,0,0.25));
+    }
+    .dashboard-brand-name {
+      font-size: 1.2rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .dashboard-brand-name span { color: var(--accent); }
+    .dashboard-brand-badge {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 0.55rem;
+      padding: 0.22rem 0.6rem;
+      border-radius: var(--radius-full);
+      background: var(--accent-dim);
+      border: 1px solid rgba(255,69,0,0.22);
+      color: var(--accent);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .dashboard-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .dashboard-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,69,0,0.45);
+      background: var(--bg-card);
+      object-fit: cover;
+      object-position: 50% 34%;
+      flex-shrink: 0;
+    }
+    .dashboard-name { font-size: 0.82rem; font-weight: 800; letter-spacing: -0.02em; }
+    .dashboard-email { font-size: 0.72rem; color: var(--text-3); margin-top: 0.18rem; }
+    .dashboard-nav { display: flex; flex-direction: column; gap: 0.2rem; }
+    .dashboard-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.62rem;
+      padding: 0.58rem 0.68rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-2);
+      font-size: 0.8rem;
+      font-weight: 700;
+      min-width: 0;
+    }
+    .dashboard-nav-item.active {
+      color: var(--text-1);
+      background: rgba(255,69,0,0.09);
+      border: 1px solid rgba(255,69,0,0.2);
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+    .dashboard-icon { width: 17px; height: 17px; color: var(--accent); }
+    .dashboard-badge {
+      margin-left: auto;
+      min-width: 24px;
+      height: 19px;
+      border-radius: var(--radius-full);
+      background: var(--accent);
+      color: var(--text-1);
+      font-size: 0.68rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+    .dashboard-membership {
+      margin-top: auto;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-md);
+      padding: 0.78rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: rgba(255,255,255,0.02);
+    }
+    .dashboard-membership strong { display: block; font-size: 0.78rem; }
+    .dashboard-membership span { color: var(--accent); font-size: 0.72rem; font-weight: 800; }
+    .dashboard-main {
+      padding: 1.8rem;
+      min-width: 0;
+      border-right: 1px solid var(--border);
+    }
+    .dashboard-main h3 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 0.45rem;
+    }
+    .dashboard-main > p { max-width: 520px; margin-bottom: 1.35rem; }
+    .dashboard-course-layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 280px) 1fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+    .dashboard-program-card {
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-md);
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255,69,0,0.15), rgba(255,69,0,0.00) 72%),
+        var(--bg-card);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 70px rgba(255,69,0,0.06);
+      min-width: 0;
+    }
+    .dashboard-program-cover {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .dashboard-program-cover img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.95;
+    }
+    .dashboard-program-body { padding: 1rem; }
+    .dashboard-program-body strong {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+    .dashboard-program-body strong span { color: var(--accent); }
+    .dashboard-program-body p {
+      margin: 0.55rem 0 0;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: var(--text-2);
+    }
+    .dashboard-modules {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+    .dashboard-module-card,
+    .dashboard-panel,
+    .dashboard-metric {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.025);
+    }
+    .dashboard-module-card {
+      padding: 0.88rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.7rem;
+      align-items: start;
+    }
+    .dashboard-module-card strong,
+    .dashboard-panel-title,
+    .dashboard-metric strong {
+      display: block;
+      color: var(--text-1);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .dashboard-module-card span,
+    .dashboard-metric span {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--text-3);
+      font-size: 0.7rem;
+      line-height: 1.35;
+    }
+    .dashboard-right-rail {
+      padding: 1.8rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      min-width: 0;
+      background: rgba(255,255,255,0.01);
+    }
+    .dashboard-panel { padding: 1rem; }
+    .dashboard-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0.85rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.58rem;
+    }
+    .dashboard-checklist li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-2);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .dashboard-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.45rem;
+      margin-top: 0.9rem;
+      color: var(--text-2);
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-align: center;
+    }
+    .dashboard-flow-step {
+      flex: 1;
+      min-width: 0;
+      padding: 0.48rem 0.35rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.02);
+    }
+    .dashboard-flow-arrow { color: var(--accent); flex: 0 0 auto; }
+    .dashboard-metrics {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.7rem;
+    }
+    .dashboard-metric { padding: 0.78rem; }
+    .dashboard-metric strong { color: var(--accent); font-size: 0.95rem; }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border);
+    }
+    .who-cell {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .who-cell:hover { background: var(--bg-surface); }
+    .who-cell:nth-child(2n) { border-right: none; }
+    .who-cell:nth-child(3), .who-cell:nth-child(4) { border-bottom: none; }
+    .who-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .two-paths {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+    .path-card {
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+    }
+    .path-card.recommended { border-color: rgba(255,69,0,0.4); position: relative; }
+    .vs-divider { font-size: 2rem; font-weight: 900; color: var(--text-3); letter-spacing: -0.04em; }
+    .path-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1.4rem;
+    }
+    .price-big { font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em; margin-bottom: 0.2rem; }
+    .price-big.old { text-decoration: line-through; color: var(--text-3); }
+    .price-note { color: var(--text-3); font-size: 0.8rem; margin-bottom: 1.5rem; }
+    .path-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .path-list li { color: var(--text-2); font-size: 0.9rem; display: flex; gap: 10px; align-items: flex-start; }
+    .mark-bad { color: var(--text-3); font-weight: 900; }
+    .mark-good { color: var(--accent); font-weight: 900; }
+    .badge-recommended {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: var(--radius-full);
+      margin-bottom: 1rem;
+    }
+
+    .what-ladder {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.015);
+    }
+    .what-step {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .what-step:last-child { border-bottom: none; }
+    .what-step-number {
+      font-size: clamp(3.5rem, 8vw, 5.4rem);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      color: transparent;
+      background: linear-gradient(180deg, #ff7a22 0%, #b32200 75%, rgba(255,69,0,0.03) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .what-step-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.7rem;
+      color: var(--text-1);
+      text-transform: uppercase;
+    }
+    .what-step-copy p { margin: 0; max-width: 760px; }
+    .ticker-section {
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-surface);
+      overflow: hidden;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 3rem;
+      animation: ticker 30s linear infinite;
+      width: max-content;
+    }
+    .ticker-section:hover .ticker-track { animation-play-state: paused; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-2);
+      white-space: nowrap;
+    }
+    .ticker-dot { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
+
+    .catalog-grid {
+      position: relative;
+      width: min(100%, 760px);
+      height: 332px;
+      margin: 0 auto;
+    }
+    .catalog-stage {
+      position: relative;
+      height: 250px;
+    }
+    .catalog-card {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 1.45rem;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-md);
+      background:
+        radial-gradient(circle at 84% 0%, rgba(255,69,0,0.17), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.014)),
+        rgba(10,10,10,0.95);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.36);
+      opacity: 0;
+      transform: translateY(58px) scale(0.92);
+      pointer-events: none;
+      transition: opacity 0.38s ease, transform 0.38s ease, border-color 0.2s ease;
+    }
+    .catalog-card.is-active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      z-index: 3;
+      pointer-events: auto;
+    }
+    .catalog-card.is-prev {
+      opacity: 0.34;
+      transform: translateY(-38px) scale(0.92);
+      z-index: 2;
+    }
+    .catalog-card.is-next {
+      opacity: 0.34;
+      transform: translateY(38px) scale(0.92);
+      z-index: 1;
+    }
+    .catalog-card.is-active:hover { border-color: rgba(255,69,0,0.38); }
+    .catalog-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 22px 22px;
+      mask-image: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.8) 48%, transparent 92%);
+      opacity: 0.32;
+      pointer-events: none;
+    }
+    .catalog-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), transparent 34%);
+      pointer-events: none;
+    }
+    .catalog-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .catalog-visual {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-md);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-1);
+      background: linear-gradient(180deg, rgba(255,104,28,0.9), rgba(121,31,0,0.74));
+      border: 1px solid rgba(255,125,54,0.32);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 0 28px rgba(255,69,0,0.14);
+      flex-shrink: 0;
+    }
+    .catalog-visual .site-icon { width: 21px; height: 21px; }
+    .catalog-step {
+      color: rgba(255,255,255,0.08);
+      font-size: clamp(3.4rem, 8vw, 5.4rem);
+      font-weight: 900;
+      letter-spacing: -0.07em;
+      line-height: 0.78;
+    }
+    .catalog-body {
+      padding: 0;
+      margin-top: auto;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      position: relative;
+      z-index: 1;
+    }
+    .catalog-tag { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; }
+    .catalog-title { font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 900; color: var(--text-1); line-height: 0.98; letter-spacing: -0.04em; }
+    .catalog-meta { font-size: 0.92rem; line-height: 1.55; color: var(--text-2); max-width: 52ch; }
+    .catalog-badge {
+      display: inline-block;
+      width: fit-content;
+      padding: 4px 10px;
+      background: rgba(255,69,0,0.11);
+      color: var(--accent);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255,69,0,0.18);
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+    .catalog-controls {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .catalog-arrow {
+      width: 40px;
+      height: 40px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.06);
+      color: var(--text-1);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .catalog-arrow:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+    .catalog-arrow .site-icon { width: 18px; height: 18px; }
+
+    .cta-band {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .cta-band-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+    }
+    .cta-microcopy { font-size: 0.75rem; color: var(--text-3); text-align: center; margin-top: 0.75rem; }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 3rem 0;
+    }
+    .proof-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-3);
+      position: relative;
+      overflow: hidden;
+    }
+    .proof-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+    }
+    .proof-item::after {
+      content: "";
+      position: absolute;
+      inset: auto 15% 0;
+      height: 44%;
+      background: radial-gradient(ellipse 70% 80% at 50% 100%, rgba(255,69,0,0.22), rgba(255,69,0,0.00) 70%);
+    }
+    .proof-closing { text-align: center; font-size: 1.1rem; font-weight: 700; color: var(--text-1); margin: 2rem 0; }
+    .proof-action { text-align: center; }
+
+    .milestone-list { display: flex; flex-direction: column; gap: 0; }
+    .milestone-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      align-items: start;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .milestone-number {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+      margin-top: 4px;
+    }
+    .milestone-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      border-radius: var(--radius-full);
+      margin-top: 1rem;
+    }
+
+    .founder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .founder-quote {
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      font-weight: 800;
+      font-style: italic;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--text-1);
+      border-left: 3px solid var(--accent);
+      padding-left: 2rem;
+      margin: 0;
+    }
+    .founder-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      font-weight: 900;
+      object-fit: cover;
+      object-position: 50% 34%;
+    }
+    .founder-name { font-size: 1rem; font-weight: 800; margin-bottom: 0.8rem; }
+
+    .pricing-card {
+      max-width: 1060px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(20,20,20,0.96), rgba(15,15,15,0.98));
+      border: 1px solid var(--border-md);
+      border-radius: 28px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      gap: 2rem;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.02), 0 28px 80px rgba(0,0,0,0.38);
+      overflow: hidden;
+      position: relative;
+    }
+    .pricing-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 14% 10%, rgba(255,69,0,0.12), transparent 30%);
+      pointer-events: none;
+    }
+    .pricing-main,
+    .pricing-side {
+      position: relative;
+      z-index: 1;
+    }
+    .pricing-main {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      min-width: 0;
+    }
+    .pricing-headline {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+    }
+    .pricing-seal {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(255,110,32,0.95), rgba(114,28,0,0.92));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 10px 30px rgba(255,69,0,0.18);
+      flex-shrink: 0;
+    }
+    .pricing-seal .site-icon {
+      width: 24px;
+      height: 24px;
+      color: #fff;
+    }
+    .pricing-brand-copy {
+      min-width: 0;
+    }
+    .pricing-kicker {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.35rem;
+    }
+    .pricing-product {
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 0;
+      color: var(--text-1);
+    }
+    .pricing-plan-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255,69,0,0.35);
+      background: rgba(255,69,0,0.12);
+      color: var(--text-1);
+      font-size: 0.9rem;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .pricing-plan-pill .site-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+    }
+    .pricing-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .pricing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.85rem;
+      border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pricing-badge .site-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--accent);
+    }
+    .tier-label { color: var(--text-3); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .price-display {
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 0;
+      text-align: center;
+    }
+    .price-prefix { font-size: 0.8rem; color: var(--text-3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+    .price-amount {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      color: var(--text-1);
+      line-height: 1;
+      margin: 0.4rem 0;
+    }
+    .price-original { font-size: 1rem; color: var(--text-3); text-decoration: line-through; }
+    .price-sub { font-size: 0.75rem; color: var(--text-3); margin-top: 0.5rem; }
+    .pricing-lead {
+      max-width: 62ch;
+      margin: 0;
+    }
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem 1.25rem;
+    }
+    .checklist li { display: flex; align-items: start; gap: 10px; font-size: 0.9rem; color: var(--text-2); }
+    .check-icon { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+    .pricing-side {
+      border-left: 1px solid var(--border);
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      justify-content: space-between;
+    }
+    .pricing-side-copy {
+      text-align: center;
+    }
+    .pricing-side-copy p {
+      margin: 0.7rem 0 0;
+      color: var(--text-2);
+    }
+    .btn-cta-full { width: 100%; justify-content: center; padding: 16px; font-size: 0.95rem; margin-top: 0; }
+    .trust-row { text-align: center; font-size: 0.72rem; color: var(--text-3); margin-top: 0; }
+    .payment-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .payment-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-width: 132px;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      color: rgba(255,255,255,0.78);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .payment-chip strong {
+      font-weight: 800;
+      color: rgba(255,255,255,0.88);
+    }
+    .payment-mark {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 auto;
+      display: block;
+    }
+    .payment-chip.paypal .payment-mark { color: #5aa6ff; }
+    .payment-chip.stripe .payment-mark { color: #a8a2ff; }
+    .payment-chip.vietqr .payment-mark { color: #ff6a57; }
+    .payment-chip.sepay .payment-mark { color: #6d9dff; }
+    .payment-chip.paypal strong { color: #e8f2ff; }
+    .payment-chip.stripe strong { color: #f0eeff; }
+    .payment-chip.vietqr strong { color: #fff0ed; }
+    .payment-chip.sepay strong { color: #edf3ff; }
+    .payment-chip:hover {
+      border-color: rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+    }
+    .order-bump {
+      max-width: 1060px;
+      margin: 1.5rem auto 0;
+      border: 1px dashed rgba(255,69,0,0.3);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      background: var(--accent-dim);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem 1.5rem;
+      align-items: center;
+    }
+    .order-bump-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .order-bump-copy {
+      min-width: 0;
+    }
+    .order-bump-title { font-size: 0.95rem; font-weight: 700; color: var(--text-1); margin-bottom: 0.5rem; }
+    .order-bump-price { font-size: 0.85rem; color: var(--accent); font-weight: 700; margin-bottom: 0; }
+    .order-check {
+      display: flex;
+      gap: 0.7rem;
+      align-items: center;
+      color: var(--text-2);
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .order-check input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+    }
+    .pricing-close { text-align: center; margin-top: 1.5rem; font-weight: 700; color: var(--text-1); }
+
+    .faq-list { max-width: 680px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-1);
+      text-align: left;
+    }
+    .faq-toggle { font-size: 1.2rem; color: var(--text-3); transition: transform 0.2s, color 0.2s; }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); color: var(--accent); }
+    .faq-answer {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 220px; padding-bottom: 1.5rem; }
+
+    .closing-cta {
+      background: transparent;
+      text-align: center;
+      padding: 8rem 0;
+    }
+    .closing-cta p { max-width: 650px; margin-left: auto; margin-right: auto; }
+
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
+    .footer-copy, .footer-links a { font-size: 0.75rem; color: var(--text-3); text-decoration: none; }
+    .footer-links { display: flex; align-items: center; gap: 1.2rem; }
+    .footer-links a:hover { color: var(--text-1); }
+
+    .img-placeholder {
+      background: linear-gradient(135deg, #141414 0%, #0f0f0f 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-3);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .reveal-init { opacity: 0; transform: translateY(24px); }
+    .revealed { animation: revealUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes revealUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .ticker-track { animation: none; }
+      #noise-canvas { display: none; }
+      .reveal-init { opacity: 1; transform: none; }
+      .revealed { animation: none; }
+      .btn-primary:hover, .catalog-card:hover { transform: none; }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      h2 { font-size: clamp(1.6rem, 6vw, 2.5rem); }
+      section { padding: 4rem 0; }
+      #hero { min-height: auto; padding-top: 8rem; }
+      .hero-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-profile-card { max-width: 440px; margin: 0 auto; transform: none; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: 1fr; }
+      .who-cell, .who-cell:nth-child(2n), .who-cell:nth-child(3), .who-cell:nth-child(4) {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .who-cell:last-child { border-bottom: none; }
+      .two-paths { grid-template-columns: 1fr; }
+      .two-paths .vs-divider { text-align: center; }
+      .cta-band-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .stats-bar { flex-wrap: wrap; gap: 1.5rem; }
+      .what-step { grid-template-columns: 90px 1fr; }
+      .catalog-grid { width: 100%; height: 360px; }
+      .catalog-stage { height: 274px; }
+      .catalog-card { padding: 1.2rem; }
+      .catalog-title { font-size: 1.45rem; }
+      .founder-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .proof-grid { grid-template-columns: 1fr 1fr; }
+      .dashboard-shot { aspect-ratio: auto; grid-template-columns: 1fr; min-height: auto; }
+      .dashboard-sidebar { display: none; }
+      .dashboard-right-rail { display: none; }
+      .dashboard-main { padding: 2rem; }
+      .dashboard-course-layout { grid-template-columns: 1fr; }
+      .dashboard-program-card { margin-top: 0; }
+      .mock-screen { grid-template-columns: 1fr; }
+      .mock-sidebar { display: none; }
+      .mock-grid { grid-template-columns: 1fr; }
+      .mock-browser { min-height: auto; }
+      .mock-screen { min-height: auto; }
+      .pricing-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; border-radius: 22px; }
+      .pricing-headline { flex-direction: column; align-items: flex-start; }
+      .pricing-side { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 1.5rem; }
+      .checklist { grid-template-columns: 1fr; }
+      .order-bump { grid-template-columns: 1fr; }
+      .price-amount { font-size: 3.2rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .container, .container-narrow { padding: 0 1rem; }
+      #nav { padding: 1rem; }
+      .catalog-grid { height: 382px; }
+      .catalog-stage { height: 300px; }
+      .catalog-card { padding: 1rem; }
+      .catalog-step { font-size: 3.4rem; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .path-card, .pricing-card { padding: 1.25rem; }
+      .milestone-item { grid-template-columns: 1fr; gap: 1rem; }
+      .milestone-number { font-size: 3.2rem; }
+      .what-step { grid-template-columns: 1fr; gap: 1rem; padding: 1.25rem; }
+      .what-step-number { font-size: 3rem; }
+      .dashboard-main { padding: 1.25rem; }
+      .dashboard-module-card { grid-template-columns: 1fr; }
+      .dashboard-program-body { padding: 0.9rem; }
+      .btn-primary, .btn-ghost { width: 100%; }
+      .stats-bar { flex-direction: column; }
+      .mock-topbar { justify-content: center; }
+      .mock-url { display: none; }
+      .payment-chip { min-width: calc(50% - 0.375rem); }
+    }
+
+    .mobile-sticky-cta {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 90;
+      display: none;
+      padding: 0.72rem 1rem calc(0.72rem + env(safe-area-inset-bottom));
+      background: rgba(8,8,8,0.92);
+      border-top: 1px solid var(--border-md);
+      backdrop-filter: blur(18px);
+      transform: translateY(110%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-sticky-cta.visible { transform: translateY(0); }
+    .mobile-sticky-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      align-items: center;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .mobile-sticky-title {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--text-1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .mobile-sticky-price {
+      display: block;
+      margin-top: 0.22rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-3);
+    }
+    .mobile-sticky-cta .btn-primary {
+      min-height: 44px;
+      padding: 0 1rem;
+      font-size: 0.78rem;
+      white-space: nowrap;
+      border-radius: var(--radius-sm);
+    }
+
+    @media (max-width: 768px) {
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+        -webkit-text-size-adjust: 100%;
+      }
+      body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+      main, section, .container, .container-narrow { min-width: 0; }
+      section { padding: 3.5rem 0; }
+      .container, .container-narrow { padding: 0 1.05rem; }
+      .section-head { margin-bottom: 1.8rem; }
+      .section-label { margin-bottom: 0.85rem; letter-spacing: 0.11em; }
+      h1 {
+        font-size: clamp(2.55rem, 12vw, 3.65rem);
+        line-height: 0.94;
+        letter-spacing: -0.032em;
+        margin-bottom: 1rem;
+      }
+      h2 {
+        font-size: clamp(1.75rem, 7.2vw, 2.45rem);
+        line-height: 1;
+        letter-spacing: -0.024em;
+      }
+      p { font-size: 0.95rem; line-height: 1.58; }
+      .btn-primary,
+      .btn-ghost,
+      .faq-question,
+      .catalog-arrow,
+      .payment-chip,
+      .order-check {
+        min-height: 44px;
+        touch-action: manipulation;
+      }
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+        justify-content: center;
+      }
+      #noise-canvas { display: none; }
+      .site-radial {
+        background:
+          radial-gradient(circle 430px at 50% 120px, rgba(255,69,0,0.22), rgba(255,69,0,0.00) 72%),
+          radial-gradient(ellipse 60% 20% at 95% 58%, rgba(255,69,0,0.08), transparent 70%);
+      }
+      .site-grid { opacity: 0.22; }
+      #nav {
+        padding: calc(0.8rem + env(safe-area-inset-top)) 1rem 0.8rem;
+        background: rgba(8,8,8,0.62);
+        backdrop-filter: blur(14px);
+      }
+      .logo-badge { width: 30px; height: 30px; }
+      .logo-word { font-size: 1.02rem; }
+      .nav-cta { font-size: 0.78rem; }
+
+      #hero {
+        min-height: 100svh;
+        padding-top: calc(6.2rem + env(safe-area-inset-top));
+        padding-bottom: 2.75rem;
+        align-items: flex-start;
+      }
+      .hero-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 1.35rem;
+      }
+      .eyebrow-pill {
+        max-width: 100%;
+        margin-bottom: 1.25rem;
+        padding: 0.48rem 0.75rem;
+        font-size: 0.72rem;
+        line-height: 1.25;
+      }
+      .hero-sub {
+        font-size: 0.98rem;
+        line-height: 1.58;
+        margin-bottom: 1.35rem;
+      }
+      .hero-actions { max-width: none; }
+      .hero-actions .btn-primary { min-height: 50px; }
+      .microcopy {
+        text-align: center;
+        font-size: 0.74rem;
+        margin-top: 0.72rem;
+      }
+      .stats-bar {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.55rem;
+        margin-top: 1.35rem;
+        padding-top: 1rem;
+      }
+      .stat-item {
+        min-width: 0;
+        padding: 0.75rem 0.5rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        background: rgba(255,255,255,0.025);
+        text-align: center;
+      }
+      .stat-value { font-size: 1.18rem; line-height: 1; }
+      .stat-label { font-size: 0.58rem; line-height: 1.15; letter-spacing: 0.07em; }
+      .hero-profile-card {
+        width: 100%;
+        max-width: none;
+        display: grid;
+        grid-template-columns: 104px minmax(0, 1fr);
+        align-items: stretch;
+        border-radius: var(--radius-md);
+      }
+      .hero-profile-visual {
+        aspect-ratio: auto;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        min-height: 132px;
+      }
+      .hero-profile-visual img { object-position: 50% 28%; }
+      .hero-profile-body { padding: 0.9rem; }
+      .hero-profile-label { font-size: 0.58rem; padding: 0.25rem 0.55rem; margin-bottom: 0.55rem; }
+      .hero-profile-name { font-size: 1rem; margin-bottom: 0.2rem; }
+      .hero-profile-role { font-size: 0.76rem; line-height: 1.35; margin-bottom: 0; }
+      .hero-profile-points { display: none; }
+
+      .preview-section { padding-top: 0.75rem; }
+      .preview-wrapper {
+        border-radius: var(--radius-md);
+        box-shadow: 0 18px 46px rgba(0,0,0,0.42), 0 0 44px rgba(255,69,0,0.05);
+      }
+      .dashboard-shot {
+        display: block;
+        aspect-ratio: auto;
+        min-height: 0;
+      }
+      .dashboard-sidebar,
+      .dashboard-right-rail,
+      .dashboard-header p,
+      .dashboard-module-card span,
+      .dashboard-program-body p {
+        display: none;
+      }
+      .dashboard-main {
+        padding: 1rem;
+        border-right: none;
+      }
+      .dashboard-header h3 { font-size: 1.35rem; margin-bottom: 0.85rem; }
+      .dashboard-course-layout {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+      .dashboard-program-cover {
+        aspect-ratio: 16 / 9;
+        max-height: 190px;
+      }
+      .dashboard-program-cover img {
+        object-fit: cover;
+        object-position: 50% 36%;
+      }
+      .dashboard-program-body { padding: 0.9rem; }
+      .dashboard-program-body strong { font-size: 1rem; }
+      .dashboard-modules {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.5rem;
+      }
+      .dashboard-module-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.35rem;
+        padding: 0.7rem 0.45rem;
+      }
+      .dashboard-module-card strong {
+        font-size: 0.68rem;
+        line-height: 1.15;
+      }
+      .dashboard-icon { width: 18px; height: 18px; }
+
+      .who-grid {
+        display: flex;
+        flex-direction: column;
+        border: none;
+        gap: 0.75rem;
+      }
+      .who-cell,
+      .who-cell:nth-child(2n),
+      .who-cell:nth-child(3),
+      .who-cell:nth-child(4) {
+        padding: 1.05rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        background: rgba(255,255,255,0.018);
+      }
+      .who-cell p {
+        max-height: 6.2em;
+        overflow: hidden;
+        margin-bottom: 0;
+      }
+      .who-tag { margin-bottom: 0.55rem; }
+
+      .two-paths {
+        gap: 0.9rem;
+      }
+      .path-card {
+        padding: 1.15rem;
+      }
+      .path-card:first-child {
+        opacity: 0.68;
+        transform: scale(0.98);
+      }
+      .path-card.recommended {
+        border-color: rgba(255,69,0,0.45);
+        box-shadow: 0 0 0 1px rgba(255,69,0,0.08), 0 18px 44px rgba(255,69,0,0.08);
+      }
+      .price-big { font-size: 2.2rem; }
+
+      .what-step {
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: 0.9rem;
+        padding: 1.05rem 0;
+      }
+      .what-step-number {
+        font-size: 2.35rem;
+        letter-spacing: -0.06em;
+      }
+      .what-step-title {
+        font-size: 1.05rem;
+        margin-bottom: 0.45rem;
+      }
+      .what-step-copy p {
+        max-height: 5em;
+        overflow: hidden;
+        font-size: 0.88rem;
+      }
+
+      .ticker-section { padding: 1rem 0; }
+      .ticker-track { animation-duration: 44s; gap: 1.5rem; }
+      .ticker-item { font-size: 0.74rem; }
+
+      .catalog-grid {
+        width: 100%;
+        height: 322px;
+      }
+      .catalog-stage { height: 246px; }
+      .catalog-card {
+        padding: 1rem;
+      }
+      .catalog-card.is-prev { transform: translateY(-22px) scale(0.94); }
+      .catalog-card.is-next { transform: translateY(22px) scale(0.94); }
+      .catalog-visual { width: 42px; height: 42px; }
+      .catalog-step { font-size: 3.2rem; }
+      .catalog-title { font-size: 1.35rem; line-height: 1; }
+      .catalog-meta {
+        font-size: 0.84rem;
+        line-height: 1.45;
+        max-height: 3.7em;
+        overflow: hidden;
+      }
+      .catalog-controls { gap: 0.85rem; }
+      .catalog-arrow { width: 46px; height: 46px; }
+
+      .cta-band { padding: 3.5rem 0; }
+      .cta-band-inner {
+        gap: 1.25rem;
+      }
+
+      .proof-grid {
+        display: flex;
+        gap: 0.85rem;
+        overflow-x: auto;
+        padding: 0 1rem 0.6rem;
+        margin: 2rem -1rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+      .proof-grid::-webkit-scrollbar { display: none; }
+      .proof-item {
+        flex: 0 0 82%;
+        max-width: 330px;
+        scroll-snap-align: center;
+        aspect-ratio: 4 / 3;
+      }
+
+      .milestone-item {
+        grid-template-columns: 52px minmax(0, 1fr);
+        gap: 0.9rem;
+        padding: 1.35rem 0;
+      }
+      .milestone-number { font-size: 2.55rem; }
+      .milestone-item p {
+        max-height: 5em;
+        overflow: hidden;
+      }
+      .founder-grid {
+        gap: 1.25rem;
+      }
+      .founder-quote {
+        padding-left: 1rem;
+        font-size: 1.32rem;
+      }
+      .founder-bio p {
+        max-height: 8.2em;
+        overflow: hidden;
+      }
+
+      .pricing-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+        padding: 1rem;
+        border-radius: 18px;
+      }
+      .pricing-side {
+        order: 1;
+        border-left: none;
+        border-top: none;
+        padding: 0;
+        gap: 0.95rem;
+      }
+      .pricing-main {
+        order: 2;
+        gap: 0.95rem;
+      }
+      .pricing-headline {
+        padding-bottom: 0.95rem;
+        align-items: center;
+      }
+      .pricing-seal {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+      }
+      .pricing-kicker { font-size: 0.62rem; }
+      .pricing-product { font-size: 1.15rem; }
+      .pricing-plan-pill {
+        padding: 0.6rem 0.72rem;
+        font-size: 0.74rem;
+      }
+      .pricing-badges {
+        gap: 0.45rem;
+      }
+      .pricing-badge {
+        padding: 0.45rem 0.62rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.05em;
+      }
+      .pricing-lead {
+        max-height: 4.8em;
+        overflow: hidden;
+        font-size: 0.88rem;
+      }
+      .price-display {
+        padding: 1rem 0;
+      }
+      .price-amount {
+        font-size: clamp(3rem, 14vw, 4.1rem);
+      }
+      .price-sub { font-size: 0.68rem; }
+      .pricing-side-copy p {
+        font-size: 0.9rem;
+        margin-top: 0.55rem;
+      }
+      .btn-cta-full { min-height: 50px; }
+      .checklist {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+      .checklist li {
+        padding: 0.58rem;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        background: rgba(255,255,255,0.018);
+        font-size: 0.72rem;
+        line-height: 1.28;
+        gap: 0.42rem;
+      }
+      .check-icon { width: 15px; height: 15px; }
+      .payment-methods {
+        padding-top: 0.85rem;
+        gap: 0.5rem;
+      }
+      .payment-chip {
+        min-width: calc(50% - 0.25rem);
+        padding: 0.58rem 0.55rem;
+        font-size: 0.74rem;
+      }
+      .payment-mark {
+        width: 18px;
+        height: 18px;
+      }
+      .order-bump {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+        padding: 1rem;
+        border-radius: var(--radius-md);
+      }
+      .order-bump-label { font-size: 0.58rem; }
+      .order-check {
+        width: 100%;
+        justify-content: flex-start;
+      }
+      .pricing-close { font-size: 0.9rem; }
+
+      .faq-list { max-width: none; }
+      .faq-question {
+        padding: 1.15rem 0;
+        font-size: 0.95rem;
+      }
+      .closing-cta {
+        padding: 5rem 0;
+      }
+      .footer-inner {
+        gap: 1rem;
+      }
+      .mobile-sticky-cta { display: block; }
+    }
+
+    @media (max-width: 430px) {
+      .container, .container-narrow { padding: 0 0.95rem; }
+      h1 { font-size: clamp(2.35rem, 12.4vw, 3.35rem); }
+      h2 { font-size: clamp(1.58rem, 7.6vw, 2.12rem); }
+      .hero-profile-card { grid-template-columns: 92px minmax(0, 1fr); }
+      .hero-profile-visual { min-height: 124px; }
+      .dashboard-modules { grid-template-columns: 1fr; }
+      .dashboard-module-card {
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+      }
+      .catalog-grid { height: 336px; }
+      .catalog-stage { height: 258px; }
+      .catalog-title { font-size: 1.22rem; }
+      .catalog-step { font-size: 2.9rem; }
+      .proof-item { flex-basis: 86%; }
+      .price-amount { font-size: clamp(2.8rem, 15vw, 3.6rem); }
+      .pricing-headline { flex-direction: column; align-items: flex-start; }
+      .pricing-plan-pill { width: 100%; justify-content: center; }
+      .mobile-sticky-inner { grid-template-columns: minmax(0, 1fr) 118px; }
+      .mobile-sticky-cta .btn-primary { padding: 0 0.72rem; }
+    }
+
+    @media (max-width: 390px) {
+      section { padding: 3rem 0; }
+      #hero { padding-top: calc(5.7rem + env(safe-area-inset-top)); }
+      .eyebrow-pill { font-size: 0.68rem; }
+      .hero-sub { font-size: 0.92rem; }
+      .stats-bar { gap: 0.42rem; }
+      .stat-item { padding: 0.62rem 0.35rem; }
+      .stat-value { font-size: 1.02rem; }
+      .stat-label { font-size: 0.52rem; }
+      .hero-profile-card { grid-template-columns: 84px minmax(0, 1fr); }
+      .hero-profile-visual { min-height: 112px; }
+      .hero-profile-role { font-size: 0.72rem; }
+      .who-cell p,
+      .what-step-copy p,
+      .milestone-item p,
+      .founder-bio p {
+        max-height: 4.8em;
+      }
+      .checklist { grid-template-columns: 1fr; }
+      .payment-chip { min-width: 100%; }
+      .mobile-sticky-title { font-size: 0.76rem; }
+      .mobile-sticky-price { font-size: 0.68rem; }
+      .mobile-sticky-inner { grid-template-columns: minmax(0, 1fr) 108px; gap: 0.55rem; }
+      .mobile-sticky-cta .btn-primary { font-size: 0.72rem; }
+    }
+
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Template Skool 2.0",
+      "brand": { "@type": "Brand", "name": "5Phuts Agen" },
+      "description": "Source code elearning đầy đủ để deploy, rebrand và sở hữu platform học tập của riêng bạn.",
+      "offers": {
+        "@type": "Offer",
+        "price": "999000",
+        "priceCurrency": "VND",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  </script>
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="icon-logo-5ai" viewBox="0 0 48 48">
+      <path d="M8 10h24l-3 8H17l-1.4 5H24c8 0 13 4.6 13 11 0 7-5.8 12-14.2 12-6.4 0-11.6-2.8-14.2-7.4l7.2-4.1c1.4 2.4 3.6 3.7 6.8 3.7 3.4 0 5.4-1.6 5.4-4.1 0-2.4-2-3.8-5.7-3.8H5.8L8 10z" fill="currentColor"/>
+      <path d="M32 8l11 5-11 5 3.2-5L32 8z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7.8 12.2l2.8 2.8 5.8-6.3"/></symbol>
+    <symbol id="icon-code" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M13.5 5.5l-3 13"/></symbol>
+    <symbol id="icon-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4V8z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24"><path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3z"/><path d="M19 3v4"/><path d="M21 5h-4"/></symbol>
+    <symbol id="icon-nodes" viewBox="0 0 24 24"><rect x="3" y="4" width="6" height="6" rx="1.4"/><rect x="15" y="4" width="6" height="6" rx="1.4"/><rect x="9" y="15" width="6" height="6" rx="1.4"/><path d="M9 7h6"/><path d="M12 10v5"/></symbol>
+    <symbol id="icon-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></symbol>
+    <symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 00-14.6-4.5L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0014.6 4.5L20 16"/><path d="M20 20v-4h-4"/></symbol>
+    <symbol id="icon-box" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4.5 8L12 12l7.5-4"/><path d="M12 12v8"/></symbol>
+    <symbol id="icon-book" viewBox="0 0 24 24"><path d="M5 4h10a4 4 0 014 4v12H9a4 4 0 00-4-4V4z"/><path d="M5 16V4"/><path d="M9 8h6"/><path d="M9 12h5"/></symbol>
+    <symbol id="icon-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 000 18h1.5a2 2 0 001.4-3.4 1.8 1.8 0 011.3-3.1H18a6 6 0 000-12h-6z"/><circle cx="8" cy="10" r="1"/><circle cx="11" cy="7" r="1"/><circle cx="15" cy="8" r="1"/></symbol>
+    <symbol id="icon-qr" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h2v2h-2z"/><path d="M18 14h2v6h-6v-2h4z"/></symbol>
+    <symbol id="icon-ai" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/><path d="M9 14l2-4 2 4"/><path d="M10 12h2"/><path d="M15 10v4"/></symbol>
+    <symbol id="icon-infinity" viewBox="0 0 24 24"><path d="M7.5 15.5C5 15.5 3 14 3 12s2-3.5 4.5-3.5c3.5 0 5.5 7 9 7C19 15.5 21 14 21 12s-2-3.5-4.5-3.5c-3.5 0-5.5 7-9 7z"/></symbol>
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/></symbol>
+    <symbol id="icon-fire" viewBox="0 0 24 24"><path d="M12 21c4 0 7-2.8 7-6.8 0-3.4-2.2-5.5-4-7.2-.5 2.2-1.6 3.6-3.1 4.6.2-3.2-1.5-5.6-4-7.6.2 4.4-3 6.2-3 10.3C5 18.2 8 21 12 21z"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 19a4 4 0 00-8 0"/><circle cx="12" cy="10" r="3"/><path d="M21 19a3.5 3.5 0 00-4-3.5"/><path d="M3 19a3.5 3.5 0 014-3.5"/></symbol>
+    <symbol id="icon-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M10 12h6M10 16h5"/></symbol>
+    <symbol id="icon-headset" viewBox="0 0 24 24"><path d="M4 13a8 8 0 0116 0v5a2 2 0 01-2 2h-3"/><path d="M4 14h4v5H6a2 2 0 01-2-2z"/><path d="M20 14h-4v5h2a2 2 0 002-2z"/></symbol>
+    <symbol id="icon-dollar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M15 9.2c-.7-.8-1.7-1.2-3-1.2-1.7 0-2.8.8-2.8 2s1 1.8 3 2.2c2 .4 3 .9 3 2.2s-1.1 2.1-3.2 2.1c-1.3 0-2.5-.4-3.3-1.3"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 00.1-6l-2.2.2a7.8 7.8 0 00-1.3-1.3l.2-2.2a8 8 0 00-6 0l.2 2.2A7.8 7.8 0 009.1 9.2L7 9a8 8 0 000 6l2.1-.2c.4.5.8.9 1.3 1.3l-.2 2.2a8 8 0 006 0l-.2-2.2c.5-.4.9-.8 1.3-1.3z"/></symbol>
+    <symbol id="icon-crown" viewBox="0 0 24 24"><path d="M4 18h16l1-10-5 3-4-6-4 6-5-3 1 10z"/><path d="M5 21h14"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M8 11l4 4 4-4"/><path d="M5 18v2h14v-2"/></symbol>
+    <symbol id="icon-screen" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M9 21h6"/><path d="M12 17v4"/></symbol>
+    <symbol id="icon-edit" viewBox="0 0 24 24"><path d="M4 20l4.5-1 10-10-3.5-3.5-10 10L4 20z"/><path d="M13.5 7L17 10.5"/></symbol>
+    <symbol id="icon-rocket" viewBox="0 0 24 24"><path d="M13 14l-3-3c1-4 4-7 9-8-1 5-4 8-8 9z"/><path d="M10 11l-5 1-2 4 6-2"/><path d="M13 14l-1 5-4 2 2-6"/><circle cx="16" cy="7" r="1.4"/></symbol>
+    <symbol id="icon-paypal-mark" viewBox="0 0 24 24">
+      <path d="M8.2 4.5h5.7c2.9 0 4.7 1.5 4.7 3.9 0 2.6-2 4.3-5.2 4.3h-2.7l-.9 6.1H6.3L8.2 4.5z" fill="currentColor" opacity="0.95"/>
+      <path d="M5.4 7.2H11c2.7 0 4.2 1.1 4.2 3.2 0 2.3-1.8 3.7-4.8 3.7H8.8l-.8 4.7H4.7L5.4 7.2z" fill="#0f4fbf"/>
+    </symbol>
+    <symbol id="icon-stripe-mark" viewBox="0 0 24 24">
+      <path d="M5 8.5c0-2.4 2-4 4.8-4 1.7 0 3.4.4 4.9 1.1l-1 2.5c-1.2-.5-2.4-.8-3.5-.8-1.1 0-1.8.4-1.8 1 0 .7.9 1 2.4 1.4 2.7.7 4.8 1.6 4.8 4.3 0 2.6-2.1 4.2-5.1 4.2-2 0-3.9-.5-5.4-1.4l1.1-2.5c1.3.7 2.8 1.1 4.1 1.1 1.2 0 2-.4 2-1.1s-.8-1-2.3-1.4C7.2 12.1 5 11.4 5 8.5z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-vietqr-mark" viewBox="0 0 24 24">
+      <path d="M3 5.5h4.2l3.4 8.5 3.6-8.5h3.3l-5.7 13H8.6L3 5.5z" fill="currentColor"/>
+      <rect x="16.5" y="6" width="4.5" height="4.5" rx="0.8" fill="#fff" opacity="0.14"/>
+      <path d="M17.7 7.2h2.1v2.1h-2.1z" fill="#fff"/>
+      <path d="M18.6 12.4c1.7 0 2.9 1.2 2.9 2.8 0 1.8-1.3 3-3.2 3-1 0-1.8-.2-2.5-.7l.8-1.6c.4.3 1 .5 1.6.5.8 0 1.3-.4 1.3-1.1 0-.6-.4-1-1.2-1h-.8v-1.9h1.1z" fill="#2d58a7"/>
+    </symbol>
+    <symbol id="icon-sepay-mark" viewBox="0 0 24 24">
+      <path d="M12 4.2c3 0 5.7 1.4 7.4 3.8l-2.3 1.6A6.2 6.2 0 0012 7c-2.1 0-4 .9-5.2 2.6L4.5 8c1.7-2.4 4.4-3.8 7.5-3.8z" fill="currentColor"/>
+      <path d="M12 19.8c-3 0-5.7-1.4-7.5-3.8l2.3-1.6A6.2 6.2 0 0012 17c2.1 0 4-.9 5.1-2.6l2.3 1.6c-1.7 2.4-4.4 3.8-7.4 3.8z" fill="currentColor" opacity="0.9"/>
+      <circle cx="12" cy="12" r="2.3" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <div class="site-background" aria-hidden="true">
+    <div class="site-radial"></div>
+    <div class="site-grid"></div>
+    <canvas id="noise-canvas"></canvas>
+  </div>
+
+  <nav id="nav" aria-label="Điều hướng chính">
+    <div class="nav-inner">
+      <a class="logo" href="#hero" aria-label="5PhutAI">
+        <svg class="logo-badge" aria-hidden="true"><use href="#icon-logo-5ai"></use></svg>
+        <span class="logo-word">5Phut<span>AI</span></span>
+      </a>
+      <a href="#pricing" class="nav-cta">xem giá →</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <div class="hero-layout">
+          <div class="hero-inner reveal">
+            <div class="eyebrow-pill"><svg class="site-icon" aria-hidden="true"><use href="#icon-rocket"></use></svg> Từ creator không platform → sở hữu platform của mình</div>
+            <h1>Ngừng thuê<br><span class="italic accent">nhà người</span><br>khác.</h1>
+            <p class="hero-sub">Template Skool 2.0 là source code elearning đầy đủ — bạn deploy, rebrand, và sở hữu hoàn toàn. Không $99/tháng, không chia doanh thu, không ai tắt được.</p>
+            <div class="hero-actions">
+              <a class="btn-primary" href="#pricing">nhận template ngay →</a>
+              <div class="microcopy">Truy cập ngay sau thanh toán · Không subscription</div>
+            </div>
+            <div class="stats-bar" id="stats">
+              <div class="stat-item">
+                <span class="stat-value" data-target="5" data-suffix=" năm">0 năm</span>
+                <span class="stat-label">kinh nghiệm</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value" data-target="1" data-suffix=" ngày">0 ngày</span>
+                <span class="stat-label">deploy trong</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value" data-target="0" data-suffix="đ">0đ</span>
+                <span class="stat-label">phí tháng</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-profile-card reveal" aria-label="Founder profile">
+            <div class="hero-profile-visual">
+              <img src="assets/founder-profile.png" alt="Founder, 5Phuts Agen" width="1152" height="2048" loading="eager" fetchpriority="high">
+            </div>
+            <div class="hero-profile-body">
+              <div class="hero-profile-label">5 năm kinh nghiệm</div>
+              <div class="hero-profile-name">Founder, 5Phuts Agen</div>
+              <div class="hero-profile-role">Xây platform số, khóa học và automation cho creator Việt.</div>
+              <ul class="hero-profile-points">
+                <li><svg class="site-icon" aria-hidden="true"><use href="#icon-check"></use></svg>5 năm build và bán sản phẩm số trong thị trường online.</li>
+                <li><svg class="site-icon" aria-hidden="true"><use href="#icon-rocket"></use></svg>Từng tự deploy, rebrand và tối ưu hệ thống cho launch thực chiến.</li>
+                <li><svg class="site-icon" aria-hidden="true"><use href="#icon-nodes"></use></svg>Hiểu rõ flow thanh toán, automation và access sau mua cho elearning.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="preview" class="preview-section" aria-label="Xem trước platform">
+      <div class="container">
+        <div class="preview-wrapper reveal">
+          <div class="dashboard-shot" role="img" aria-label="Dashboard preview Template Skool 2.0 của 5PhutAI với khóa học, checklist launch và automation thanh toán">
+            <aside class="dashboard-sidebar" aria-hidden="true">
+              <div>
+                <div class="dashboard-brand">
+                  <svg class="dashboard-brand-mark" aria-hidden="true"><use href="#icon-logo-5ai"></use></svg>
+                  <div class="dashboard-brand-name">5Phut<span>AI</span></div>
+                </div>
+                <div class="dashboard-brand-badge">Template Skool 2.0</div>
+              </div>
+              <div class="dashboard-profile">
+                <img class="dashboard-avatar" src="assets/founder-profile.png" alt="">
+                <div>
+                  <div class="dashboard-name">Founder, 5Phuts Agen</div>
+                  <div class="dashboard-email">owner@5phutai.vn</div>
+                </div>
+              </div>
+              <div class="dashboard-nav">
+                <div class="dashboard-nav-item"><svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-home"></use></svg>Tổng quan</div>
+                <div class="dashboard-nav-item active"><svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-book"></use></svg>Khóa học</div>
+                <div class="dashboard-nav-item"><svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-users"></use></svg>Cộng đồng <span class="dashboard-badge">24</span></div>
+                <div class="dashboard-nav-item"><svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-qr"></use></svg>Thanh toán</div>
+                <div class="dashboard-nav-item"><svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-nodes"></use></svg>Automation</div>
+                <div class="dashboard-nav-item"><svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-doc"></use></svg>Tài liệu</div>
+                <div class="dashboard-nav-item"><svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-headset"></use></svg>Hỗ trợ</div>
+              </div>
+              <div class="dashboard-membership">
+                <svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-crown"></use></svg>
+                <div><strong>Platform riêng</strong><span>Lifetime owner</span></div>
+              </div>
+            </aside>
+            <div class="dashboard-main">
+              <h3>Template Skool 2.0</h3>
+              <p>Platform elearning riêng: khóa học, cộng đồng, thanh toán và automation trong một hệ thống.</p>
+              <div class="dashboard-course-layout">
+                <article class="dashboard-program-card">
+                  <div class="dashboard-program-cover">
+                    <img src="assets/template-skool-2-poster.png" alt="Course cover Template Skool 2.0 Builder" loading="lazy" width="1024" height="1536">
+                  </div>
+                  <div class="dashboard-program-body">
+                    <strong>Template Skool 2.0<br><span>Builder</span></strong>
+                    <p>Source code elearning để deploy, rebrand và bán khóa học của bạn.</p>
+                  </div>
+                </article>
+                <div class="dashboard-modules">
+                  <div class="dashboard-module-card">
+                    <svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-rocket"></use></svg>
+                    <div><strong>Setup 24h</strong><span>Deploy Replit hoặc VPS, cấu hình domain và database.</span></div>
+                  </div>
+                  <div class="dashboard-module-card">
+                    <svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-palette"></use></svg>
+                    <div><strong>Rebrand thương hiệu</strong><span>Đổi tên, màu, logo và nội dung thành platform của bạn.</span></div>
+                  </div>
+                  <div class="dashboard-module-card">
+                    <svg class="site-icon dashboard-icon" aria-hidden="true"><use href="#icon-qr"></use></svg>
+                    <div><strong>Sepay + Auto-enroll</strong><span>Khách quét QR, hệ thống tự tạo tài khoản và mở khóa.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="dashboard-right-rail" aria-hidden="true">
+              <div class="dashboard-panel">
+                <div class="dashboard-panel-title">Launch checklist</div>
+                <ul class="dashboard-checklist">
+                  <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Source code</li>
+                  <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Database</li>
+                  <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Sepay QR</li>
+                  <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Domain</li>
+                </ul>
+              </div>
+              <div class="dashboard-panel">
+                <div class="dashboard-panel-title">Flow sau thanh toán</div>
+                <div class="dashboard-flow">
+                  <span class="dashboard-flow-step">QR</span>
+                  <span class="dashboard-flow-arrow">→</span>
+                  <span class="dashboard-flow-step">Tài khoản</span>
+                  <span class="dashboard-flow-arrow">→</span>
+                  <span class="dashboard-flow-step">Mở khóa</span>
+                </div>
+              </div>
+              <div class="dashboard-metrics">
+                <div class="dashboard-metric"><strong>0đ</strong><span>phí tháng cho 5PhutAI</span></div>
+                <div class="dashboard-metric"><strong>1 ngày</strong><span>deploy bản đầu tiên</span></div>
+                <div class="dashboard-metric"><strong>Lifetime</strong><span>update miễn phí</span></div>
+              </div>
+            </aside>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="who">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">DÀNH CHO AI</div>
+          <h2>Template Skool 2.0 dành cho ai?</h2>
+        </div>
+        <div class="who-grid">
+          <article class="who-cell reveal">
+            <div class="who-tag">KNOWLEDGE CREATOR</div>
+            <h3>Creator nội dung</h3>
+            <p>Bạn tạo khóa học, ebook, hoặc template nhưng đang phải trả $99/tháng cho Skool — platform không thuộc về mình. Template này cho bạn hệ thống tương tự, chạy trên server của bạn, không ai kiểm soát được.</p>
+          </article>
+          <article class="who-cell reveal">
+            <div class="who-tag">FREELANCER / AGENCY</div>
+            <h3>Freelancer & Agency</h3>
+            <p>Bạn muốn bán dịch vụ hoặc sản phẩm số nhưng ghép 5-7 tool không kết nối nhau. Template này là một platform duy nhất: store, classroom, automation, admin — tất cả trong một.</p>
+          </article>
+          <article class="who-cell reveal">
+            <div class="who-tag">SOLOPRENEUR</div>
+            <h3>Solopreneur</h3>
+            <p>Bạn không biết code và không muốn thuê developer vài chục triệu. Hướng dẫn setup từng bước viết cho người không có nền tảng kỹ thuật — nếu dùng được Notion, bạn làm được.</p>
+          </article>
+          <article class="who-cell reveal">
+            <div class="who-tag">EARLY MOVER</div>
+            <h3>Người muốn đi trước AI</h3>
+            <p>2025: khoảng cách giữa người có hệ thống và không có đang nở rộng nhanh. Kiến trúc template được thiết kế để mở rộng với AI — bạn thêm automation thông minh khi sẵn sàng.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="paths">
+      <div class="container">
+        <div class="section-head center reveal">
+          <h2>Hai con đường. Một lựa chọn.</h2>
+          <p>Tiếp tục thuê nền tảng người khác, hoặc sở hữu hệ thống của chính bạn từ hôm nay.</p>
+        </div>
+        <div class="two-paths">
+          <article class="path-card reveal">
+            <div class="path-label">TIẾP TỤC THUÊ PLATFORM</div>
+            <div class="price-big old">$99/tháng</div>
+            <div class="price-note">mãi mãi</div>
+            <ul class="path-list">
+              <li><span class="mark-bad">×</span> Không sở hữu dữ liệu học viên</li>
+              <li><span class="mark-bad">×</span> Skool tăng giá, bạn không có lựa chọn</li>
+              <li><span class="mark-bad">×</span> Chia doanh thu cho platform người khác</li>
+            </ul>
+            <a class="btn-ghost" href="#paths">TIẾP TỤC NHƯ CŨ</a>
+          </article>
+          <div class="vs-divider reveal">VS</div>
+          <article class="path-card recommended reveal">
+            <div class="badge-recommended">RECOMMENDED</div>
+            <div class="path-label">VỚI TEMPLATE SKOOL 2.0</div>
+            <div class="price-big">999.000đ</div>
+            <div class="price-note">trả một lần · không phí ẩn</div>
+            <ul class="path-list">
+              <li><span class="mark-good">✓</span> Source code thuộc về bạn 100%</li>
+              <li><span class="mark-good">✓</span> Deploy trên server của bạn, không ai tắt được</li>
+              <li><span class="mark-good">✓</span> Update lifetime miễn phí</li>
+            </ul>
+            <a class="btn-primary" href="#pricing">CHO TÔI SỞ HỮU NGAY →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="what">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">BẠN NHẬN ĐƯỢC GÌ</div>
+          <h2>Tất cả công cụ bạn cần để launch platform của mình</h2>
+        </div>
+        <div class="what-ladder">
+          <article class="what-step reveal">
+            <div class="what-step-number">01</div>
+            <div class="what-step-copy">
+              <div class="what-step-title">Nhận core system của 5PhutAI</div>
+              <p>Frontend, backend và database đã build sẵn để bạn có thể đi thẳng vào việc launch thay vì ghép nhiều tool rời rạc. Đây là phần nền giúp bạn sở hữu platform học tập của mình ngay từ đầu.</p>
+            </div>
+          </article>
+          <article class="what-step reveal">
+            <div class="what-step-number">02</div>
+            <div class="what-step-copy">
+              <div class="what-step-title">Setup như một người có technical team</div>
+              <p>Bạn nhận hướng dẫn video và text từng bước từ upload code, kết nối database đến cấu hình domain. Viết cho người không biết code nhưng vẫn muốn triển khai gọn và đúng.</p>
+            </div>
+          </article>
+          <article class="what-step reveal">
+            <div class="what-step-number">03</div>
+            <div class="what-step-copy">
+              <div class="what-step-title">Rebrand thành thương hiệu của bạn</div>
+              <p>Đổi tên, màu sắc, logo và nội dung để platform nhìn là biết của bạn, không mang cảm giác thuê nhà người khác. Mọi thứ được thiết kế để rebrand nhanh và không phụ thuộc bên ngoài.</p>
+            </div>
+          </article>
+          <article class="what-step reveal">
+            <div class="what-step-number">04</div>
+            <div class="what-step-copy">
+              <div class="what-step-title">Tự động hóa flow sau thanh toán</div>
+              <p>Khách mua xong là hệ thống tự tạo tài khoản, tự gán đúng khóa học và mở quyền truy cập ngay. Bạn không phải ngồi xử lý tay, và học viên không phải chờ được duyệt.</p>
+            </div>
+          </article>
+          <article class="what-step reveal">
+            <div class="what-step-number">05</div>
+            <div class="what-step-copy">
+              <div class="what-step-title">Nhận thanh toán QR Việt Nam trực tiếp</div>
+              <p>Sepay được tích hợp sẵn để khách quét QR ngân hàng quen thuộc. Tiền đi thẳng về tài khoản của bạn, không qua trung gian và không bị giữ trong ví của platform khác.</p>
+            </div>
+          </article>
+          <article class="what-step reveal">
+            <div class="what-step-number">06</div>
+            <div class="what-step-copy">
+              <div class="what-step-title">Giữ lợi thế bằng update lifetime</div>
+              <p>Mua một lần và tiếp tục nhận cập nhật khi template được nâng cấp theo thị trường, công nghệ và nhu cầu launch mới. Bạn không phải trả phí tháng để giữ hệ thống hoạt động.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ticker" class="ticker-section" aria-label="Tính năng nổi bật">
+      <div class="ticker-track" aria-hidden="true">
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-book"></use></svg> Classroom đầy đủ · Module & Bài học</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-qr"></use></svg> QR Sepay tích hợp sẵn</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-nodes"></use></svg> Auto-enroll sau thanh toán</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-card"></use></svg> Digital Product Store</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-settings"></use></svg> Admin Panel quản lý đầy đủ</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-rocket"></use></svg> Deploy Replit hoặc VPS</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-infinity"></use></svg> Lifetime Update</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-play"></use></svg> YouTube embed hỗ trợ sẵn</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-palette"></use></svg> Rebrand 100% thương hiệu của bạn</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-book"></use></svg> Classroom đầy đủ · Module & Bài học</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-qr"></use></svg> QR Sepay tích hợp sẵn</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-nodes"></use></svg> Auto-enroll sau thanh toán</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-card"></use></svg> Digital Product Store</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-settings"></use></svg> Admin Panel quản lý đầy đủ</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-rocket"></use></svg> Deploy Replit hoặc VPS</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-infinity"></use></svg> Lifetime Update</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-play"></use></svg> YouTube embed hỗ trợ sẵn</span>
+        <span class="ticker-item"><svg class="site-icon ticker-dot" aria-hidden="true"><use href="#icon-palette"></use></svg> Rebrand 100% thương hiệu của bạn</span>
+      </div>
+    </section>
+
+    <section id="catalog">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">BẠN NHẬN VỀ</div>
+          <h2>6 lợi thế trong một gói 5PhutAI</h2>
+        </div>
+        <div class="catalog-grid" data-step-carousel>
+          <div class="catalog-stage">
+          <article class="catalog-card is-active" data-step-card>
+            <div class="catalog-top">
+              <div class="catalog-visual"><svg class="site-icon" aria-hidden="true"><use href="#icon-code"></use></svg></div>
+              <div class="catalog-step">01</div>
+            </div>
+            <div class="catalog-body">
+              <div class="catalog-tag">SOURCE CODE</div>
+              <div class="catalog-title">Template Skool 2.0</div>
+              <div class="catalog-meta">Toàn bộ frontend, backend và database để bạn deploy ngay.</div>
+              <div class="catalog-badge">Sẵn sàng launch</div>
+            </div>
+          </article>
+          <article class="catalog-card is-next" data-step-card>
+            <div class="catalog-top">
+              <div class="catalog-visual"><svg class="site-icon" aria-hidden="true"><use href="#icon-play"></use></svg></div>
+              <div class="catalog-step">02</div>
+            </div>
+            <div class="catalog-body">
+              <div class="catalog-tag">HƯỚNG DẪN</div>
+              <div class="catalog-title">Setup từng bước</div>
+              <div class="catalog-meta">Video và text rõ từng bước cho người không có nền tảng kỹ thuật.</div>
+              <div class="catalog-badge">Dễ làm theo</div>
+            </div>
+          </article>
+          <article class="catalog-card" data-step-card>
+            <div class="catalog-top">
+              <div class="catalog-visual"><svg class="site-icon" aria-hidden="true"><use href="#icon-palette"></use></svg></div>
+              <div class="catalog-step">03</div>
+            </div>
+            <div class="catalog-body">
+              <div class="catalog-tag">BRANDING</div>
+              <div class="catalog-title">Rebrand thương hiệu</div>
+              <div class="catalog-meta">Đổi tên, màu, logo và nội dung để platform mang dấu ấn của bạn.</div>
+              <div class="catalog-badge">100% của bạn</div>
+            </div>
+          </article>
+          <article class="catalog-card" data-step-card>
+            <div class="catalog-top">
+              <div class="catalog-visual"><svg class="site-icon" aria-hidden="true"><use href="#icon-qr"></use></svg></div>
+              <div class="catalog-step">04</div>
+            </div>
+            <div class="catalog-body">
+              <div class="catalog-tag">PAYMENT</div>
+              <div class="catalog-title">Thanh toán tích hợp</div>
+              <div class="catalog-meta">Hỗ trợ VietQR, Sepay, Stripe và PayPal để chốt đơn linh hoạt hơn.</div>
+              <div class="catalog-badge">Nhận tiền trực tiếp</div>
+            </div>
+          </article>
+          <article class="catalog-card" data-step-card>
+            <div class="catalog-top">
+              <div class="catalog-visual"><svg class="site-icon" aria-hidden="true"><use href="#icon-nodes"></use></svg></div>
+              <div class="catalog-step">05</div>
+            </div>
+            <div class="catalog-body">
+              <div class="catalog-tag">AUTOMATION</div>
+              <div class="catalog-title">Flow sau thanh toán</div>
+              <div class="catalog-meta">Mua xong, hệ thống tạo tài khoản và mở khóa học tự động ngay.</div>
+              <div class="catalog-badge">Auto-enroll</div>
+            </div>
+          </article>
+          <article class="catalog-card is-prev" data-step-card>
+            <div class="catalog-top">
+              <div class="catalog-visual"><svg class="site-icon" aria-hidden="true"><use href="#icon-infinity"></use></svg></div>
+              <div class="catalog-step">06</div>
+            </div>
+            <div class="catalog-body">
+              <div class="catalog-tag">LIFETIME</div>
+              <div class="catalog-title">Update vĩnh viễn</div>
+              <div class="catalog-meta">Mua một lần và tiếp tục nhận cập nhật khi template được nâng cấp.</div>
+              <div class="catalog-badge">Không phí ẩn</div>
+            </div>
+          </article>
+          </div>
+          <div class="catalog-controls" aria-label="Điều khiển 6 lợi thế">
+            <button class="catalog-arrow" type="button" data-step-prev aria-label="Lợi thế trước">
+              <svg class="site-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/><path d="M21 12H9"/></svg>
+            </button>
+            <button class="catalog-arrow" type="button" data-step-next aria-label="Lợi thế tiếp theo">
+              <svg class="site-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/><path d="M3 12h12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta-mid" class="cta-band">
+      <div class="container">
+        <div class="cta-band-inner reveal">
+          <div>
+            <h2>Bắt đầu sở hữu platform của mình ngay hôm nay</h2>
+            <p>Deploy trong 1 ngày. Rebrand trong vài giờ. Launch ngay khi bạn sẵn sàng.</p>
+          </div>
+          <div>
+            <a class="btn-primary btn-primary-lg" href="#pricing">CHO TÔI TRUY CẬP NGAY →</a>
+            <div class="cta-microcopy">Truy cập ngay sau thanh toán</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proof">
+      <div class="container">
+        <div class="section-head center reveal">
+          <div class="section-label">KẾT QUẢ</div>
+          <h2>ĐÂY LÀ KẾT QUẢ CỦA NGƯỜI ĐÃ DÙNG</h2>
+        </div>
+        <div class="proof-grid">
+          <div class="proof-item reveal"><img src="https://motionsites.ai/assets/hero-new-era-auto-preview-W56vp0xD.gif" alt="Kết quả khách hàng 1" loading="lazy"></div>
+          <div class="proof-item reveal"><img src="https://motionsites.ai/assets/hero-targo-preview-BF9qQyMr.gif" alt="Kết quả khách hàng 2" loading="lazy"></div>
+          <div class="proof-item reveal"><img src="https://motionsites.ai/assets/hero-viktor-portfolio-preview-Bd2-Dg_u.gif" alt="Kết quả khách hàng 3" loading="lazy"></div>
+          <div class="proof-item reveal"><img src="https://motionsites.ai/assets/hero-pro-ai-deck-preview-BBbLJNeM.gif" alt="Kết quả khách hàng 4" loading="lazy"></div>
+          <div class="proof-item reveal"><img src="https://motionsites.ai/assets/hero-securify-preview-DQSYrftH.gif" alt="Kết quả khách hàng 5" loading="lazy"></div>
+          <div class="proof-item reveal"><img src="https://motionsites.ai/assets/codercrest-hero-CoycO52t.gif" alt="Kết quả khách hàng 6" loading="lazy"></div>
+        </div>
+        <div class="proof-closing reveal">Của bạn có thể là tiếp theo.</div>
+        <div class="proof-action reveal">
+          <a class="btn-primary" href="#pricing">YES, CHO TÔI TRUY CẬP NGAY →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-label">QUY TRÌNH</div>
+          <h2>3 bước từ mua đến launch...</h2>
+          <p>Không cần biết code. Không cần thuê developer.</p>
+        </div>
+        <div class="milestone-list">
+          <article class="milestone-item reveal">
+            <div class="milestone-number">01</div>
+            <div>
+              <h3>Nhận Template & Tài Liệu</h3>
+              <p>Ngay sau thanh toán, bạn truy cập source code và toàn bộ tài liệu hướng dẫn. Không chờ đợi. Không qua email xét duyệt.</p>
+              <span class="milestone-tag">Ngay sau thanh toán</span>
+            </div>
+          </article>
+          <article class="milestone-item reveal">
+            <div class="milestone-number">02</div>
+            <div>
+              <h3>Deploy & Rebrand</h3>
+              <p>Làm theo hướng dẫn từng bước. Platform chạy trên server bạn, mang tên bạn, trong vòng 1 ngày.</p>
+              <span class="milestone-tag">Trong 1 ngày</span>
+            </div>
+          </article>
+          <article class="milestone-item reveal">
+            <div class="milestone-number">03</div>
+            <div>
+              <h3>Tạo Sản Phẩm & Launch</h3>
+              <p>Dùng hướng dẫn tạo sản phẩm số để đưa nội dung lên và bắt đầu nhận đơn hàng. Platform của bạn, doanh thu của bạn.</p>
+              <span class="milestone-tag">Ngay khi sẵn sàng</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="founder">
+      <div class="container">
+        <div class="section-label reveal">VỀ NGƯỜI TẠO RA</div>
+        <div class="founder-grid">
+          <blockquote class="founder-quote reveal">"Tôi bán công cụ đã được dùng thật. Không bán lời hứa về thu nhập."</blockquote>
+          <div class="founder-bio reveal">
+            <img class="founder-avatar" src="assets/founder-profile.png" alt="Founder, 5Phuts Agen" loading="lazy" width="64" height="64">
+            <div class="founder-name">Founder, 5Phuts Agen</div>
+            <p>5 năm xây dựng và vận hành kinh doanh số, từ thời chưa có AI đến khi AI trở thành công cụ bắt buộc. Đã test nhiều platform, trả chi phí cho nhiều tool, và học cách thích nghi khi thị trường online thay đổi liên tục. Template Skool 2.0 là hệ thống tôi muốn có từ đầu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="container">
+        <div class="section-head center reveal">
+          <div class="section-label">GIÁ</div>
+          <h2>Template Skool 2.0 — Gói Lifetime</h2>
+        </div>
+        <article class="pricing-card reveal">
+          <div class="pricing-main">
+            <div class="pricing-headline">
+              <div class="pricing-brand">
+                <div class="pricing-seal"><svg class="site-icon" aria-hidden="true"><use href="#icon-rocket"></use></svg></div>
+                <div class="pricing-brand-copy">
+                  <div class="pricing-kicker">Lifetime Pricing</div>
+                  <h3 class="pricing-product">Template Skool 2.0</h3>
+                </div>
+              </div>
+              <div class="pricing-plan-pill"><svg class="site-icon" aria-hidden="true"><use href="#icon-spark"></use></svg> One-time Access</div>
+            </div>
+            <div class="pricing-badges">
+              <div class="pricing-badge"><svg class="site-icon" aria-hidden="true"><use href="#icon-code"></use></svg> Source Code Full</div>
+              <div class="pricing-badge"><svg class="site-icon" aria-hidden="true"><use href="#icon-palette"></use></svg> Rebrand 100%</div>
+              <div class="pricing-badge"><svg class="site-icon" aria-hidden="true"><use href="#icon-qr"></use></svg> PayPal · Stripe · VietQR · Sepay</div>
+            </div>
+            <p class="pricing-lead">Mua một lần, nhận trọn bộ hệ thống elearning: source code, setup, rebrand, thanh toán và automation. Không subscription, không chia doanh thu.</p>
+            <ul class="checklist">
+              <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Source code full: frontend, backend, database</li>
+              <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Setup guide video + text từng bước</li>
+              <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Rebrand nhanh theo thương hiệu bạn</li>
+              <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Auto-enroll: mua → tài khoản → mở khóa</li>
+              <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Payment: PayPal, Stripe, VietQR, Sepay</li>
+              <li><svg class="site-icon check-icon" aria-hidden="true"><use href="#icon-check"></use></svg> Lifetime update, không phí ẩn</li>
+            </ul>
+          </div>
+          <div class="pricing-side">
+            <div class="pricing-side-copy">
+              <div class="tier-label">Thanh toán một lần duy nhất</div>
+              <div class="price-display">
+                <div class="price-prefix">Chỉ</div>
+                <div class="price-amount">999.000đ</div>
+                <div class="price-original">2.990.000đ</div>
+                <div class="price-sub">trả một lần · lifetime access · không subscription</div>
+              </div>
+              <p>Thanh toán xong là nhận access và tài liệu ngay.</p>
+            </div>
+            <a class="btn-primary btn-cta-full" href="#pricing">MUA NGAY →</a>
+            <div class="trust-row">Thanh toán bảo mật · Gửi access ngay sau xác nhận</div>
+            <div class="payment-methods" aria-label="Các phương thức thanh toán được hỗ trợ">
+              <span class="payment-chip paypal"><svg class="payment-mark" aria-hidden="true"><use href="#icon-paypal-mark"></use></svg><strong>PayPal</strong></span>
+              <span class="payment-chip stripe"><svg class="payment-mark" aria-hidden="true"><use href="#icon-stripe-mark"></use></svg><strong>Stripe</strong></span>
+              <span class="payment-chip vietqr"><svg class="payment-mark" aria-hidden="true"><use href="#icon-vietqr-mark"></use></svg><strong>VietQR</strong></span>
+              <span class="payment-chip sepay"><svg class="payment-mark" aria-hidden="true"><use href="#icon-sepay-mark"></use></svg><strong>Sepay</strong></span>
+            </div>
+          </div>
+        </article>
+        <div class="order-bump reveal">
+          <div class="order-bump-copy">
+            <div class="order-bump-label">THÊM VÀO ĐƠN HÀNG — ƯU ĐÃI MỘT LẦN</div>
+            <div class="order-bump-title">Workshop: Tạo Sản Phẩm Số Từ AI Trong 48 Giờ</div>
+            <div class="order-bump-price"><span class="price-original">799.000đ</span> → 299.000đ</div>
+          </div>
+          <label class="order-check">
+            <input type="checkbox" name="workshop-bump">
+            <span>Thêm workshop vào đơn (+299.000đ)</span>
+          </label>
+        </div>
+        <div class="pricing-close reveal">1 học viên đầu tiên là bạn gỡ lại chi phí ngay.</div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head center reveal">
+          <div class="section-label">CÂU HỎI THƯỜNG GẶP</div>
+          <h2>Mọi thắc mắc được trả lời</h2>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a1">
+              <span>Không biết code có dùng được không?</span><span class="faq-toggle">+</span>
+            </button>
+            <div id="faq-a1" class="faq-answer">Được. Hướng dẫn được viết cho người không có nền tảng kỹ thuật, từng bước, không bỏ sót. Nếu bạn biết dùng Google Drive và Notion, bạn làm được.</div>
+          </article>
+          <article class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a2">
+              <span>Khác Skool như thế nào?</span><span class="faq-toggle">+</span>
+            </button>
+            <div id="faq-a2" class="faq-answer">Skool là nền tảng bạn thuê — $99/tháng, dữ liệu do Skool kiểm soát. Template Skool 2.0 là source code bạn sở hữu — chạy trên server của bạn, không ai tắt được ngoài bạn.</div>
+          </article>
+          <article class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a3">
+              <span>Nhận được gì ngay sau thanh toán?</span><span class="faq-toggle">+</span>
+            </button>
+            <div id="faq-a3" class="faq-answer">Source code, toàn bộ tài liệu hướng dẫn, hướng dẫn rebrand, và hướng dẫn cấu hình Sepay — tất cả trong vài phút sau khi thanh toán xác nhận.</div>
+          </article>
+          <article class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a4">
+              <span>Chi phí vận hành hàng tháng là bao nhiêu?</span><span class="faq-toggle">+</span>
+            </button>
+            <div id="faq-a4" class="faq-answer">Replit free plan đủ để bắt đầu. Nâng cấp khi có traffic ($7–15/tháng). Không có phí nào từ 5Phuts Agen sau lần mua đầu tiên.</div>
+          </article>
+          <article class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-a5">
+              <span>Template có được update khi công nghệ thay đổi không?</span><span class="faq-toggle">+</span>
+            </button>
+            <div id="faq-a5" class="faq-answer">Có. Bạn nhận update miễn phí. Đây là cam kết của người đã 5 năm adapt theo thị trường online.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing-cta" aria-labelledby="closing-title">
+      <div class="container-narrow reveal">
+        <h2 id="closing-title">Thị trường AI không chờ ai sẵn sàng.</h2>
+        <p>Creator có platform riêng đang có lợi thế ngày càng lớn hơn. Template Skool 2.0 là bước đầu tiên để bạn không bị bỏ lại phía sau.</p>
+        <a class="btn-primary btn-primary-lg" href="#pricing">NHẬN TEMPLATE NGAY →</a>
+        <div class="microcopy">Trả một lần. Không phí ẩn. Không subscription. Không chia doanh thu.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-copy">© 2025 5Phuts Agen</div>
+        <div class="footer-links" aria-label="Liên kết phụ">
+          <a href="#pricing">Giá</a>
+          <a href="#faq">FAQ</a>
+          <a href="#hero">Lên đầu</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-sticky-cta" id="mobile-sticky-cta" aria-label="Mua Template Skool 2.0">
+    <div class="mobile-sticky-inner">
+      <div>
+        <span class="mobile-sticky-title">Template Skool 2.0</span>
+        <span class="mobile-sticky-price">999.000đ · trả một lần</span>
+      </div>
+      <a class="btn-primary" href="#pricing">Mua ngay →</a>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('noise-canvas');
+      if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const ctx = canvas.getContext('2d', { alpha: true });
+      if (!ctx) return;
+
+      let frame = 0;
+      let animationId = 0;
+      const canvasSize = 1024;
+      const patternRefreshInterval = 2;
+      const patternAlpha = 18;
+
+      const resize = () => {
+        canvas.width = canvasSize;
+        canvas.height = canvasSize;
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+      };
+
+      const drawGrain = () => {
+        const imageData = ctx.createImageData(canvasSize, canvasSize);
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const value = Math.random() * 255;
+          data[i] = value;
+          data[i + 1] = value;
+          data[i + 2] = value;
+          data[i + 3] = patternAlpha;
+        }
+        ctx.putImageData(imageData, 0, 0);
+      };
+
+      const loop = () => {
+        if (frame % patternRefreshInterval === 0) drawGrain();
+        frame++;
+        animationId = window.requestAnimationFrame(loop);
+      };
+
+      window.addEventListener('resize', resize);
+      window.addEventListener('beforeunload', () => window.cancelAnimationFrame(animationId));
+      resize();
+      loop();
+    })();
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    (() => {
+      const sticky = document.getElementById('mobile-sticky-cta');
+      const hero = document.getElementById('hero');
+      const pricing = document.getElementById('pricing');
+      const mobileQuery = window.matchMedia('(max-width: 768px)');
+      if (!sticky || !hero || !pricing) return;
+
+      const updateSticky = () => {
+        if (!mobileQuery.matches) {
+          sticky.classList.remove('visible');
+          return;
+        }
+        const heroBottom = hero.getBoundingClientRect().bottom;
+        const pricingRect = pricing.getBoundingClientRect();
+        const pastHero = heroBottom < window.innerHeight * 0.64;
+        const pricingVisible = pricingRect.top < window.innerHeight * 0.82 && pricingRect.bottom > window.innerHeight * 0.18;
+        sticky.classList.toggle('visible', pastHero && !pricingVisible);
+      };
+
+      window.addEventListener('scroll', updateSticky, { passive: true });
+      window.addEventListener('resize', updateSticky);
+      if (mobileQuery.addEventListener) {
+        mobileQuery.addEventListener('change', updateSticky);
+      } else if (mobileQuery.addListener) {
+        mobileQuery.addListener(updateSticky);
+      }
+      updateSticky();
+    })();
+
+    document.querySelectorAll('.faq-question').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+
+    document.querySelectorAll('[data-step-carousel]').forEach((carousel) => {
+      const cards = Array.from(carousel.querySelectorAll('[data-step-card]'));
+      const prev = carousel.querySelector('[data-step-prev]');
+      const next = carousel.querySelector('[data-step-next]');
+      if (!cards.length || !prev || !next) return;
+
+      let active = 0;
+      const render = () => {
+        const last = cards.length - 1;
+        cards.forEach((card, index) => {
+          card.classList.remove('is-active', 'is-prev', 'is-next');
+          if (index === active) card.classList.add('is-active');
+          if (index === (active - 1 + cards.length) % cards.length) card.classList.add('is-prev');
+          if (index === (active + 1) % cards.length) card.classList.add('is-next');
+          card.setAttribute('aria-hidden', index === active ? 'false' : 'true');
+        });
+      };
+
+      prev.addEventListener('click', () => {
+        active = (active - 1 + cards.length) % cards.length;
+        render();
+      });
+      next.addEventListener('click', () => {
+        active = (active + 1) % cards.length;
+        render();
+      });
+      render();
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationDelay = `${i * 0.1}s`;
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+      el.classList.add('reveal-init');
+      observer.observe(el);
+    });
+
+    function animateCounter(el, target, suffix = '') {
+      let start = 0;
+      const duration = 1500;
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.stat-value').forEach((stat) => {
+            animateCounter(stat, Number(stat.dataset.target), stat.dataset.suffix || '');
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.45 });
+
+    const stats = document.getElementById('stats');
+    if (stats) statsObserver.observe(stats);
+  </script>
+</body>
+</html>
